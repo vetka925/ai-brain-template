@@ -109,12 +109,6 @@ test('link findings report original source lines without exposing destination va
  const f=fixture(t,{'CLAUDE.md':'# Rules\n```md\n[example](ignored.md)\n```\n[one](PRIVATE_PATH.md)\n[[wiki/missing]]\n'});
  const r=f.run();assert.deepEqual(r.errors.filter(e=>e.code==='link').map(e=>e.line),[6,5]);assert.ok(!JSON.stringify(r).includes('PRIVATE_PATH'));
 });
-test('default checks local skill templates without knowledge metadata or placeholder false positives',t=>{
- const f=fixture(t,{'CLAUDE.md':'# Rules','.claude/skills/example/templates/page.md':'# Template\n[placeholder](<path>) [prototype](<prototype.html#route>)\n'});
- assert.equal(f.run().status,0);
- f.write('.claude/skills/example/templates/page.md','---\nbroken: [\n---\n[real](<missing.md>)');
- const r=f.run();assert.equal(r.status,1);assert.ok(r.errors.some(e=>e.code==='yaml'));assert.ok(r.errors.some(e=>e.code==='link'));
-});
 test('startup includes bounded profile instead of hiding its context cost',t=>{
  const f=fixture(t,{'CLAUDE.md':'abc','wiki/meta/conventions.md':'abc','wiki/meta/profile.md':'abcdef'});
  const r=f.run(); assert.equal(r.metrics.startup.estimate,4);

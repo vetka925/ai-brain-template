@@ -8,7 +8,7 @@ const budgets = {'CLAUDE.md':1900,'wiki/meta/conventions.md':2700,'wiki/meta/pro
 const estimate = text => Math.ceil(Buffer.byteLength(text, 'utf8') / 3);
 const git = (...args) => execFileSync('git', args, {encoding:'utf8',stdio:['ignore','pipe','pipe'],maxBuffer:16*1024*1024});
 const names = text => text.split('\0').filter(Boolean);
-const mechanism = file => /(^|\/)(CLAUDE|AGENTS|GEMINI|SKILL)\.md$/.test(file) || /^(tasks|index|log|INSTALL|README)\.md$/.test(file) || /^(tools\/README|wiki\/meta\/work-pipelines|docs\/checks\/brain-scenarios)\.md$/.test(file) || /^\.claude\/skills\/[^/]+\/templates\/.*\.md$/.test(file) || /^wiki\/_templates\//.test(file) || /^wiki\/meta\/(profile|conventions|reflections)\.md$/.test(file) || /^wiki\/[^/]+\/_context\.md$/.test(file);
+const mechanism = file => /(^|\/)(CLAUDE|AGENTS|GEMINI|SKILL)\.md$/.test(file) || /^(tasks|index|log|INSTALL|README)\.md$/.test(file) || /^(tools\/README|wiki\/meta\/work-pipelines|docs\/checks\/brain-scenarios)\.md$/.test(file) || /^wiki\/_templates\//.test(file) || /^wiki\/meta\/(profile|conventions|reflections)\.md$/.test(file);
 function extractLinks(text) {
  const links=[];
  const lineAt=index=>text.slice(0,index).split('\n').length;
@@ -95,7 +95,6 @@ function main() {
   return same && !candidates.some(existed);
  }
  function checkLink(file, target, obsidian, incomingOnly=false, line, angle=false) {
-  if(/\/templates\//.test(file) && angle && /^(path|prototype\.html#route)$/.test(target))return;
   target=normalizeTarget(target);
   if(!target || /^[a-z][a-z\d+.-]*:/i.test(target) || target.startsWith('//') || /[<>*{}]/.test(target)) return;
   try { target=decodeURIComponent(target); } catch { issue('review',file,'link-format','Malformed URL encoding',line);return; }

@@ -19,7 +19,7 @@ If `design/install/STATE.md` says the installation is incomplete, read [INSTALL.
 - `tasks.md`: open action, next step, who acts or waits, detail link. `log.md`: short dated changes, newest first. Details and history belong in linked pages or archives.
 - Distinguish faithful copying, factual support and freshness. A source records a dated claim; its truth needs separate support. Preserve conflicting dated positions.
 - Every factual or attributed wiki claim must lead to its supporting source. Copy quotes, dates and numbers exactly. Label unsupported factual inference `[model inference, unverified]`.
-- Sources: a `raw/` path; living code with repository, branch, path and check date; ticket or document URL with read date; frozen snapshot with its original location; or the owner's direct statement with date. Commits alone describe history.
+- Sources: a `raw/` path; living code with repository, branch, path and check date; ticket or document URL with read date; frozen snapshot with its original location; the owner's direct statement with date; or an export file outside the Brain named with its date and file name. Commits alone describe history.
 - Only the owner's explicit approval of identified text sets `status: verified`; anything unmarked is draft. A substantive change removes `verified`; typo or link repair keeps it. Operational instructions use `type: operational`; change their rules only with the owner's authorization. `last_linted` records only a source review.
 
 ## Preserve authored sources
@@ -34,13 +34,13 @@ One catalog: `.claude/skills/`; `.agents/skills` points to it. Name the [pipelin
 
 Read freely; write within requested scope.
 
-- **Raw-only:** save the exact source and its domain metadata, then a short log entry, `npm run rotate:log` and Git. Do not create a wiki interpretation merely to finish.
-- **Knowledge, operational or design change:** update the smallest affected pages, evidence and authorship. Update navigation when destinations change. Add one short dated log entry linking to details, run `npm run rotate:log`, then Git.
+- **Raw-only:** save the exact source and its domain metadata, then a short log entry, `npm run rotate:log` (if Node is installed) and Git. Do not create a wiki interpretation merely to finish.
+- **Knowledge, operational or design change:** update the smallest affected pages, evidence and authorship. Update navigation when destinations change. Add one short dated log entry linking to details, run `npm run rotate:log` (if Node is installed), then Git.
 - Bring specific uncertainties to the owner; whole-wiki proofreading is not a standing debt.
 
 ## Privacy and Git
 
-This Brain is private. Use the configured private remote only; never add a public remote or publish content without the owner's explicit request. Before writing inspect branch, HEAD and working tree. Before pushing fetch, inspect concurrent changes and integrate safely; stage named paths, check status, commit and push in the same session. Preserve unrelated work. Commit messages: short English single line; agent commits append `[agent@host:session]`. Record the exact model in the artifact, not in the commit.
+This Brain is private. Use the configured private remote only; never add a public remote or publish content without the owner's explicit request. Before writing inspect branch, HEAD and working tree. Before pushing fetch, inspect concurrent changes and integrate safely; stage named paths, check status, commit and push in the same session. Preserve unrelated work. Commit messages: short English single line; agent commits append `[<tool>@<hostname>:<short session id or date>]`, for example `[claude-code@laptop:2026-10-26]`. Record the exact model in the artifact, not in the commit.
 
 Keep credentials, account details, document numbers, amounts and every other secret out of wiki, tasks, logs, commits and tool output; keep only a pointer to the private source. Do not copy personal material to other repositories or machines without explicit permission.
 

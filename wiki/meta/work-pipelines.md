@@ -3,14 +3,14 @@ type: operational
 updated: "2026-10-26"
 last_linted: ""
 sources:
-  - "Source Brain, wiki/meta/work-pipelines.md, decisions of 2026-10-07 and 2026-10-13; see docs/lessons.md"
+  - "docs/lessons.md, sections 4–6 (decisions of 2026-10-07 and 2026-10-13 in the source Brain)"
 authorship:
   - {kind: model, model: claude-fable-5-1, provider: Anthropic, program: Claude Code, contribution: "2026-10-26: template text"}
 ---
 
 # Work pipelines
 
-Every task starts by choosing one pipeline. Name it in the first reply; the owner may switch it.
+Every task starts by choosing one pipeline. Name it in the first reply for Plan → build and Find out and report; the owner may switch it.
 
 | Pipeline | Typical work | Owner's gates | Skill |
 |---|---|---|---|

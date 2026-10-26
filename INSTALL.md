@@ -11,7 +11,7 @@ Order of the first actions: check capabilities (step 0), ask the owner (step 1),
 Establish and write down in STATE.md:
 
 - You can create files and directories, run shell commands and Git. If not, tell the owner exactly which capability is missing and stop.
-- Which agent you are (Claude Code, Codex, Gemini CLI, other) and which instruction file your tool reads at startup: `CLAUDE.md`, `AGENTS.md` or `GEMINI.md`. All three exist in the template; `AGENTS.md` and `GEMINI.md` point to `CLAUDE.md`. If your tool follows neither, copy the content of `CLAUDE.md` into the file it does read and note it in STATE.md.
+- Which agent you are (Claude Code, Codex, Gemini CLI, other) and which instruction file your tool reads at startup: `CLAUDE.md`, `AGENTS.md` or `GEMINI.md`. All three exist in the template; `AGENTS.md` and `GEMINI.md` point to `CLAUDE.md`. If your tool follows neither, create the file it does read with the same one-line pointer as `AGENTS.md` and note it in STATE.md; never a second copy of the contract.
 - Where skills are discovered by your tool. The catalog is `.claude/skills/`; `.agents/skills` is a symlink to it. If your tool needs another location, add a symlink, never a copy.
 - `git --version` and `node --version` (Node 18+ is needed only for `npm run check:brain`, `test:brain` and `rotate:log`; without Node the Brain still works, the checks are skipped and noted in STATE.md).
 - Whether you have access to the owner's past conversations. Usually you do not. Do not claim to have read chats you could not open.
@@ -32,13 +32,13 @@ Do not ask for a biography. The profile is built from what the owner says and fr
 ## 2. Create the instance
 
 1. Create the directory and initialize Git with a fresh history, or clone the owner's private repository created from this template. If you cloned this public template directly, remove its `.git` and run `git init`; the public repository must not remain a remote of the private Brain. If a remote is configured, verify now that it is private (for GitHub: `gh repo view --json visibility` or the web page) before any personal content is written; a public remote stops the installation until the owner changes it.
-2. Copy all template files except `README.md` (replace it with a two-line README naming the owner and pointing to `CLAUDE.md`), `INSTALL.md` (keep it: it is needed for resumption and updates) and `docs/lessons.md` (keep it; it is the reasoning behind the rules).
+2. Copy all template files. Replace only `README.md` with a two-line README naming the owner and pointing to `CLAUDE.md`. Keep `INSTALL.md` (needed for resumption and updates) and `docs/lessons.md` (the reasoning behind the rules). Record the template URL and commit in `design/install/STATE.md`.
 3. For each domain from step 1: create `raw/<domain>/CLAUDE.md` and `wiki/<domain>/CLAUDE.md` from the one-paragraph pattern in [raw/CLAUDE.md](raw/CLAUDE.md) and [wiki/CLAUDE.md](wiki/CLAUDE.md), stating in one or two sentences what belongs there. Add the domains to `index.md`.
 4. Fill `wiki/meta/profile.md` with only what the owner stated, each item dated and sourced («Owner, YYYY-MM-DD»). Leave the rest of the stub.
 5. Fill `wiki/meta/conventions.md` section «Owner's preferences» from step 1.6, each item sourced to the owner's statement. Do not invent preferences.
-6. Record the owner's language in `conventions.md` section 2. If it is not English, translate the stub sentences of `index.md`, `tasks.md`, `profile.md` and `conventions.md`; in `log.md` keep the exact header `# AI Brain log` and place only dated entries beneath it, translating entry prose only. The entry format stays `YYYY-MM-DD — area(slug) [request: …; author model: …] — text. [link]`; `npm run rotate:log` depends on it.
+6. Record the owner's language in `conventions.md` section 2. If it is not English, translate only the one-line intros and placeholders of `index.md`, `tasks.md`, `profile.md` and section 2 of `conventions.md`; never translate `CLAUDE.md`, skills or section 1 of `conventions.md` (non-Latin scripts take about twice the bytes and would break the startup budgets); in `log.md` keep the exact header `# AI Brain log` and place only dated entries beneath it, translating entry prose only. The entry format stays `YYYY-MM-DD — area(slug) [request: …; author model: …] — text. [link]`; `npm run rotate:log` depends on it.
 7. If Node is available: `npm ci`, `git config core.hooksPath .githooks`, `git add -A`, then `npm run check:brain -- --all` (the default scope skips untracked files and would pass an empty repository) and `npm run test:brain`. Fix errors in system files and read the review candidates; do not loosen the checks.
-8. Add the first `log.md` entry describing the installation, commit «Install AI Brain», and push if a private remote is configured and verified; otherwise record «private remote not configured» in `tasks.md`.
+8. Delete the example task in `tasks.md` and the example entry in `log.md`. Add the first `log.md` entry describing the installation, commit «Install AI Brain», and push if a private remote is configured and verified; otherwise record «private remote not configured» in `tasks.md`.
 
 ## 3. Import existing materials
 
@@ -51,8 +51,8 @@ Only after step 2 is committed. Work in `design/import/` with a `STATE.md` (inve
 
 Rules for every imported item:
 
-- **Owner's own words** (notes, diary, drafts, their side of chats) go to `raw/<domain>/` verbatim, with `author`, `date`, `source`, `domain` in frontmatter ([template](wiki/_templates/raw-source.md)). Never rewrite them. If a source mixes permitted content with excluded private details, leave the original outside the Brain, record a pointer to it, and ask the owner which excerpts may be imported; do not import a redacted version silently.
-- **Chats with an AI** are sources with two speakers. Keep the owner's statements and decisions; the model's proposals are not the owner's decisions and are not facts about the owner. A plan proposed in an old chat becomes a task only if the owner confirms it is still wanted. Store the chat verbatim in `raw/` only if the owner wants it kept; otherwise record the extracted statements with the chat's date and file name as source.
+- **Owner's own words** (notes, diary, drafts) go to `raw/<domain>/` verbatim, with `author`, `title`, `date`, `source`, `domain` in frontmatter ([template](wiki/_templates/raw-source.md)). Never rewrite them. If a source mixes permitted content with excluded private details, leave the original outside the Brain, record a pointer to it, and ask the owner which excerpts may be imported; do not import a redacted version silently.
+- **Chats with an AI** are sources with two speakers. Keep the owner's statements and decisions; the model's proposals are not the owner's decisions and are not facts about the owner. A plan proposed in an old chat becomes a task only if the owner confirms it is still wanted. Store the chat verbatim in `raw/` only if the owner wants it kept; otherwise record the extracted statements with the source «Owner, <chat date>, chat export <file name> (outside the Brain)». A single export file holding many conversations (ChatGPT, Claude exports) is split into one source per conversation first; record the split in `design/import/STATE.md`.
 - **Documents and external material** become `wiki/` pages with sources; keep an exact copy in `raw/` only when the original may disappear.
 - **Facts about the owner** go to `profile.md` only with a dated owner statement as source.
 - **Preferences about working with the agent** go to `conventions.md` only if the owner stated them explicitly; otherwise list them as proposals in `wiki/meta/rule-proposals.md`.
@@ -62,7 +62,7 @@ Rules for every imported item:
 
 ## 4. Acceptance: a fresh session must work
 
-Run these in a new session or with a subagent that has not seen this conversation, in a **disposable local copy** of the installed Brain (`cp -r` to a temporary directory, no remote), so that synthetic records never enter the real Brain. Tell the tester that installation is under acceptance and that it must not resume INSTALL.md. Copy only the results back into the real `design/install/STATE.md`, then delete the copy.
+Run these in a new session or with a subagent that has not seen this conversation, in a **disposable local copy** of the installed Brain (`cp -r` to a temporary directory, then `git remote remove origin` in the copy; confirm with `git remote -v` that it has no remote), so that synthetic records never enter the real Brain. Tell the tester: installation is under acceptance and must not be resumed; every start card is answered «Go»; result cards need no answer. Test 5 needs a second message to the same tester. Copy only the results back into the real `design/install/STATE.md`, then delete the copy.
 
 1. «Save verbatim, source only: …» → one `raw/` file with the exact text, a log entry, no wiki interpretation. Then «What do I think about …?» → the answer cites that file.
 2. «Record the decision: today I chose X for project Y» → a dated statement in the right wiki page with the owner as source; a log entry.

@@ -14,4 +14,4 @@ Facts about the owner that change how the agent reasons: occupation, main projec
 
 - (nothing recorded yet)
 
-Work with the owner as a thinking partner: look for the deeper question when it is genuinely present, prefer depth and original synthesis to generic summaries, verify quotations and state uncertainty plainly. Working rules: [conventions](conventions.md).
+Working rules: [conventions](conventions.md).
