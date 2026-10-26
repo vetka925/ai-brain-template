@@ -10,7 +10,7 @@ Order of the first actions: check capabilities (step 0), ask the owner (step 1),
 
 Establish and write down in STATE.md:
 
-- You can create files and directories, run shell commands and Git. If not, tell the owner exactly which capability is missing and stop.
+- You can create files and directories, run shell commands and Git, and write into a `.claude/` directory. Prove it: run `git --version`, create and delete a test file inside a scratch `.claude/` directory. If any of these is refused (for example a non-interactive session without shell approval), tell the owner exactly which capability is missing and how to grant it, and stop before creating the Brain: a Brain without Git, skills or checks is not an installation.
 - Which agent you are (Claude Code, Codex, Gemini CLI, other) and which instruction file your tool reads at startup: `CLAUDE.md`, `AGENTS.md` or `GEMINI.md`. All three exist in the template; `AGENTS.md` and `GEMINI.md` point to `CLAUDE.md`. If your tool follows neither, create the file it does read with the same one-line pointer as `AGENTS.md` and note it in STATE.md; never a second copy of the contract.
 - Where skills are discovered by your tool. The catalog is `.claude/skills/`; `.agents/skills` is a symlink to it. If your tool needs another location, add a symlink, never a copy.
 - `git --version` and `node --version` (Node 18+ is needed only for `npm run check:brain`, `test:brain` and `rotate:log`; without Node the Brain still works, the checks are skipped and noted in STATE.md).
@@ -32,7 +32,7 @@ Do not ask for a biography. The profile is built from what the owner says and fr
 
 ## 2. Create the instance
 
-1. Create the directory and initialize Git with a fresh history, or clone the owner's private repository created from this template. If you cloned this public template directly, remove its `.git` and run `git init`; the public repository must not remain a remote of the private Brain. If a remote is configured, verify now that it is private (for GitHub: `gh repo view --json visibility` or the web page) before any personal content is written; a public remote stops the installation until the owner changes it.
+1. Create the directory and initialize Git with a fresh history, or clone the owner's private repository created from this template. If you cloned this public template directly, remove its `.git` and run `git init`; the public repository must not remain a remote of the private Brain. If a remote is configured, verify now that it is private (for GitHub: `gh repo view --json visibility` or the web page) before any personal content is written; a public remote stops the installation until the owner changes it. Set the commit identity locally in the new repository: `git config user.name "<owner's name>"` and `git config user.email "<owner's address or a local placeholder such as owner@localhost>"`; never inherit the machine's global identity, on a shared or borrowed machine it belongs to someone else and would enter the private history.
 2. Copy all template files. Replace only `README.md` with a two-line README naming the owner and pointing to `CLAUDE.md`. Keep `INSTALL.md` (needed for resumption and updates) and `docs/lessons.md` (the reasoning behind the rules). Record the template URL and commit in `design/install/STATE.md`.
 3. For each domain from step 1: create `raw/<domain>/CLAUDE.md` and `wiki/<domain>/CLAUDE.md` from the one-paragraph pattern in [raw/CLAUDE.md](raw/CLAUDE.md) and [wiki/CLAUDE.md](wiki/CLAUDE.md), stating in one or two sentences what belongs there. Add the domains to `index.md`.
 4. Fill `wiki/meta/profile.md` with only what the owner stated, each item dated and sourced («Owner, YYYY-MM-DD»). Leave the rest of the stub.
@@ -46,7 +46,7 @@ Do not ask for a biography. The profile is built from what the owner says and fr
 Only after step 2 is committed. Work in `design/import/` with a `STATE.md` (inventory, batch plan, progress) so a later session can continue.
 
 1. **Inventory first.** List every source the owner named: path, type, size, date range, in scope or not. Show the list to the owner only if something is ambiguous; otherwise proceed.
-2. **Pilot batch.** Process three to five representative items end to end, following the rules below. Show the owner where each went and why, with one example per destination (a raw record, a wiki page, a task). Ask whether the split is right. Adjust the rules in `design/import/STATE.md` from their answer.
+2. **Pilot batch.** Process three to five representative items end to end, following the rules below. Show the owner where each went and why, with one example per destination (a raw record, a wiki page, a task). Ask whether the split is right and adjust the rules in `design/import/STATE.md` from the answer. If the owner said they are unavailable, continue with the full import and record «review the import split» in `tasks.md` with one example per destination.
 3. **Full import in batches.** Process the rest in batches you can finish within a session; commit after each batch; record progress. Never leave a batch half-written without a note in STATE.md.
 4. **Finish** with a summary in `log.md` and open items in `tasks.md` (sources that could not be opened, conflicts the owner must resolve).
 
@@ -68,7 +68,7 @@ Run these in a new session or with a subagent that has not seen this conversatio
 1. «Save verbatim, source only: …» → one `raw/` file with the exact text, a log entry, no wiki interpretation. Then «What do I think about …?» → the answer cites that file.
 2. «Record the decision: today I chose X for project Y» → a dated statement in the right wiki page with the owner as source; a log entry.
 3. «What am I working on?» → the agent names the Active threads from `tasks.md` and reads the linked page before claiming status.
-4. «Implement …» (something small) → the agent names the pipeline, writes a start card, works in `design/<slug>/` with `STATE.md`, reports with evidence.
+4. «Implement …» (a change that needs a plan: more than one file or a new script with a test, not a one-line fix) → the agent names the pipeline, writes a start card, works in `design/<slug>/` with `STATE.md`, reports with evidence.
 5. Correct the agent on an invented detail → it records one short entry in `reflections.md` with evidence, without adding a new permanent rule.
 6. `npm run check:brain -- --all` passes; `npm run rotate:log` runs without error.
 
