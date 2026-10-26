@@ -1,0 +1,16 @@
+{
+  "name": "ai-brain",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "test:brain": "node --test tools/tests/brain-*.test.cjs",
+    "check:brain": "node tools/brain-check.cjs",
+    "rotate:log": "node tools/rotate-log.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "yaml": "2.9.0"
+  }
+}

@@ -1,0 +1,5 @@
+#!/bin/sh
+# Blocks a commit only when a staged startup file exceeds its budget (tools/README.md).
+command -v node >/dev/null 2>&1 || exit 0
+root=$(git rev-parse --show-toplevel) || exit 0
+exec node "$root/tools/brain-check.cjs" --staged-startup

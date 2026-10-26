@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+.obsidian/workspace.json
+# session scratch and local secrets never go to the remote
+.tmp/
+.scratch/
+.env
+__pycache__/
