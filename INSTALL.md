@@ -15,6 +15,7 @@ Establish and write down in STATE.md:
 - Where skills are discovered by your tool. The catalog is `.claude/skills/`; `.agents/skills` is a symlink to it. If your tool needs another location, add a symlink, never a copy.
 - `git --version` and `node --version` (Node 18+ is needed only for `npm run check:brain`, `test:brain` and `rotate:log`; without Node the Brain still works, the checks are skipped and noted in STATE.md).
 - Whether you have access to the owner's past conversations. Usually you do not. Do not claim to have read chats you could not open.
+- The exact model identifier your runtime exposes. Use it in every authorship field and log entry you create; if it is not exposed, write `unknown (exact model not recorded)`. Never shorten it to a family name (`gpt-6.1-sol` is not «GPT-6»).
 
 ## 1. Ask the owner (one batch)
 
@@ -51,7 +52,7 @@ Only after step 2 is committed. Work in `design/import/` with a `STATE.md` (inve
 
 Rules for every imported item:
 
-- **Owner's own words** (notes, diary, drafts) go to `raw/<domain>/` verbatim, with `author`, `title`, `date`, `source`, `domain` in frontmatter ([template](wiki/_templates/raw-source.md)). Never rewrite them. If a source mixes permitted content with excluded private details, leave the original outside the Brain, record a pointer to it, and ask the owner which excerpts may be imported; do not import a redacted version silently.
+- **Owner's own words** (notes, diary, drafts) go to `raw/<domain>/` verbatim, with `author`, `title`, `date`, `source`, `domain` in frontmatter ([template](wiki/_templates/raw-source.md)). Never rewrite them. If a source mixes permitted content with excluded private details, keep the original outside the Brain and record a pointer; do not store a redacted replacement as a verbatim raw source. When the owner has put the materials in scope and named the exclusions, extract the standalone non-sensitive owner statements as sourced claims without another question: each excerpt exact, speaker identified, cited to the original file and date. Never copy a secret-bearing statement; if an excerpt cannot be separated safely, leave it out, record the unresolved item and continue. Ask only when the boundary itself is unclear.
 - **Chats with an AI** are sources with two speakers. Keep the owner's statements and decisions; the model's proposals are not the owner's decisions and are not facts about the owner. A plan proposed in an old chat becomes a task only if the owner confirms it is still wanted. Store the chat verbatim in `raw/` only if the owner wants it kept; otherwise record the extracted statements with the source «Owner, <chat date>, chat export <file name> (outside the Brain)». A single export file holding many conversations (ChatGPT, Claude exports) is split into one source per conversation first; record the split in `design/import/STATE.md`.
 - **Documents and external material** become `wiki/` pages with sources; keep an exact copy in `raw/` only when the original may disappear.
 - **Facts about the owner** go to `profile.md` only with a dated owner statement as source.
