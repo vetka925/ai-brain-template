@@ -12,8 +12,8 @@ npm run rotate:log                      # move the oldest log entries unchanged 
 npm run test:brain                      # tests of the scripts themselves
 ```
 
-- `brain-check.cjs` verifies frontmatter, required metadata on wiki/design/docs pages, local link destinations, symlinks and size budgets. It cannot verify claims, external URLs, approval or live state. Raw bodies are never parsed. `--json` gives machine-readable output. Exit 1 means findings; exit 2 means it could not run.
-- `rotate-log.cjs` moves the oldest `log.md` entries unchanged into monthly archives until the log fits its budget, and points the footer at the newest archive. It refuses an unrecognized layout.
+- `brain-check.cjs` verifies frontmatter, required metadata on wiki/design/docs pages, local link destinations, symlinks and size budgets. The default scope is tracked mechanism files (contracts, skills, startup pages, INSTALL, README, pipelines, scenarios); use `-- --all` in a fresh or mostly untracked repository, and read the review candidates, which do not fail the exit status. It cannot verify claims, external URLs, approval or live state. Raw bodies are never parsed. `--json` gives machine-readable output. Exit 1 means findings; exit 2 means it could not run.
+- `rotate-log.cjs` moves the oldest `log.md` entries unchanged into monthly archives until the log fits its budget, and points the footer at the newest archive. It refuses an unrecognized layout. Archived entries keep their root-relative links unchanged; the checker resolves them from the repository root, and a Markdown viewer opened inside `log-archive/` will not. This is a deliberate trade for keeping entries byte-identical.
 - `brain-budget-hook.cjs --start` runs at session start (Claude Code: `.claude/settings.json`; Codex: `.codex/hooks.json`). It prints one line per startup file at or above 85% of its budget and a reminder when `wiki/meta/reflections.md` has `reviewed:` older than 30 days. It only reports and never blocks.
 - `.githooks/pre-commit` blocks a commit only when a staged startup file exceeds its budget.
 

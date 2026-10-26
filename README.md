@@ -33,7 +33,7 @@ The hard part of a personal knowledge system is not the folder layout. It is dec
 
 ## Private, not a fork
 
-Your Brain contains your private material, so it must live in a **private** repository. A fork of a public repository on GitHub cannot be made private, so do not fork. Use **Use this template → Create a new repository → Private**, or let the agent clone this repository and start a fresh Git history in your own private remote. The installer checks that the remote is private before importing anything personal.
+Your Brain contains your private material, so it must live in a **private** repository. A fork of a public repository on GitHub cannot be made private, so do not fork. Use **Use this template → Create a new repository → Private**, or let the agent clone this repository and start a fresh Git history in your own private remote. The installer verifies that any configured remote is private before it writes anything personal; without a remote it works locally and records that as an open item.
 
 ## Updating later
 
@@ -41,13 +41,14 @@ System files (contract, skills, tools, templates) and your files (sources, wiki 
 
 ## Requirements
 
-- An agent that can read files, run shell commands and use Git.
-- Git and Node.js 18+ on the machine where the Brain lives (Node is only for the mechanical checks).
-- A private Git remote (GitHub, GitLab, Gitea or any other).
+- A local agent environment with file access, a POSIX shell, Git and symlink support (Claude Code, Codex and Gemini CLI were used; the hook configurations are theirs and other tools need their own).
+- Node.js 18+ for the mechanical checks; optional at first.
+- A private Git remote (GitHub, GitLab, Gitea or any other); optional at first, the Brain works locally.
+- Your materials as files the agent can open (exports of chats and notes, documents, repositories). The agent cannot log into your services for you; large imports proceed in batches you review.
 
 ## License
 
-MIT for the system files. Your content is yours.
+MIT for the system files ([LICENSE](LICENSE)). Your content is yours.
 
 ---
 

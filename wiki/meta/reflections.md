@@ -20,7 +20,9 @@ Before a task that resembles a past failure, search this page for the subject an
 
 ## Review
 
-On the owner's request (or when the session hook says the review is overdue), read the entries with their evidence, note which corrections held and which repeated, move resolved entries to the archive unchanged, and set `reviewed:` above. A repeated error means the existing safeguard was insufficient; propose a change in rule-proposals rather than adding another prohibition.
+The session hook's «review overdue» line is a reminder to propose a review to the owner, not an instruction to start one.
+
+On the owner's request, read the entries with their evidence, note which corrections held and which repeated, move resolved entries to the archive unchanged, and set `reviewed:` above. A repeated error means the existing safeguard was insufficient; propose a change in rule-proposals rather than adding another prohibition.
 
 ## Entries
 

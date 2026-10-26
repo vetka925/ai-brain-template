@@ -16,7 +16,9 @@ Every task starts by choosing one pipeline. Name it in the first reply; the owne
 |---|---|---|---|
 | **Do now** | fixes, small edits, Brain maintenance: a change describable in one sentence | none; one-line result | conventions |
 | **Plan → build** | implementation, infrastructure, personal projects, anything that needs a plan | 1. start card; 2. result card with something to try | `implement-task` |
-| **Find out and report** | research, comparisons, investigations, product checks | 1. start card; 2. result card | `deep-research`, `query` |
+| **Find out and report** | a requested research deliverable, comparison, investigation | 1. start card; 2. result card | `deep-research` |
+
+Answering a question from the Brain (`query`) is «Do now» and read-only; it needs no card.
 
 A task that grows past its pipeline (a «do now» fix that needs a design choice) stops and moves to the next pipeline.
 

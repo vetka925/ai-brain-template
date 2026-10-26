@@ -2,7 +2,7 @@
 type: "" # entity | concept | summary | reference | operational
 status: draft # draft | verified (only after the owner's approval of identified text)
 sources: [] # raw path; URL with read date; "Owner, YYYY-MM-DD: statement"
-last_linted: "" # date of the last source review, set only by lint
+last_linted: "" # date of the last source review; set when the owner asks to apply lint results
 authorship:
   - kind: model # model | human
     model: "" # exact session model; "unknown (exact model not recorded)" if not exposed

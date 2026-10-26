@@ -5,7 +5,7 @@ description: Audit the AI Brain's structure or source support on explicit reques
 
 # Lint
 
-Audit without edits, `last_linted` updates, commits or pushes. Apply fixes only when the owner requests them.
+Audit without edits, commits or pushes. Apply fixes, and set `last_linted` on the reviewed pages, only when the owner explicitly asks to apply the source-review results.
 
 ## Choose the scope first
 

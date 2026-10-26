@@ -5,7 +5,7 @@ description: Answer from the AI Brain with source citations. Use for «what do w
 
 # Query
 
-Follow the root rules for personal context, evidence, privacy and current information. The question is the search scope; distinguish an explicit query from a silent context check.
+Follow the root rules for personal context, evidence, privacy and current information. The question is the search scope; distinguish an explicit query from a silent context check. A query is «Do now» and read-only: no cards, no saved report. Use `deep-research` and the «Find out and report» pipeline only when the owner asks for a research deliverable.
 
 ## Procedure
 
