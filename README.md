@@ -1,10 +1,12 @@
 # AI Brain — a personal memory and working system for you and your AI agent
 
-**Give your AI agent this link, `https://github.com/vetka925/ai-brain-template`, and tell it:**
+Open your AI agent (Claude Code, Codex or any agent that can run shell commands) and paste this:
 
-> Install my personal AI Brain from this repository by following its INSTALL.md. Then help me move my existing notes, chats and projects into it.
+```text
+Install my personal AI Brain from https://github.com/vetka925/ai-brain-template by following its INSTALL.md. Then help me move my existing notes, chats and projects into it.
+```
 
-That is the whole onboarding. The installer is written for the agent, not for you. The agent asks you a handful of questions, creates a private repository, builds the structure, imports what you already have and shows you how to use it. Used daily with Claude Code and Codex; Gemini CLI reads `GEMINI.md`; any agent that can read Markdown, run shell commands and use Git can follow the same contract.
+That is the whole onboarding. The installer is written for the agent, not for you. The agent asks you a handful of questions, creates a private repository, builds the structure, imports what you already have and shows you how to use it.
 
 ## What you get
 
@@ -24,8 +26,6 @@ A private Git repository where your agent keeps, in files, everything it should 
 ## What this is based on
 
 This package is the portable essence of one person's AI Brain, used daily since mid-2026 with Claude Code and Codex across work, research, personal projects and life records. The rules here are not a theory; each one came from something that went wrong or worked well. [docs/lessons.md](docs/lessons.md) tells that story so you can decide what to keep.
-
-Deliberately not included: task boards, schedulers, watchdogs, Telegram bots and other automation. A Brain works with one person and one agent session at a time; add automation later if you want it.
 
 ## Why the agent installs it, not you
 
@@ -54,4 +54,10 @@ MIT for the system files ([LICENSE](LICENSE)). Your content is yours.
 
 ## Для русскоязычных
 
-Дайте своему агенту ссылку на этот репозиторий и скажите: «Установи мне личный AI Brain по INSTALL.md и помоги перенести в него мои заметки, чаты и проекты». Агент сам задаст несколько вопросов, создаст приватный репозиторий, построит структуру и разложит ваши материалы. Язык личных файлов агент выберет по вашему ответу; системные файлы и инструкции на английском, потому что так их читает любой агент.
+Откройте своего агента (Claude Code, Codex или любой другой с доступом к терминалу) и вставьте:
+
+```text
+Установи мне личный AI Brain из https://github.com/vetka925/ai-brain-template по его INSTALL.md. Потом помоги перенести в него мои заметки, чаты и проекты.
+```
+
+Агент сам задаст несколько вопросов, создаст приватный репозиторий, построит структуру и разложит ваши материалы. Язык личных файлов агент выберет по вашему ответу; системные файлы и инструкции на английском, потому что так их читает любой агент.
