@@ -63,6 +63,19 @@ The source Brain grew a task board, schedulers, watchdogs, a Telegram bridge and
 
 Claude Code reads `CLAUDE.md`, Codex reads `AGENTS.md`, Gemini reads `GEMINI.md`; skills are discovered from `.claude/skills` or `.agents/skills`. The Brain keeps one real contract and one skill catalog, with pointer files and symlinks for the others, and records the exact model behind every change. Tool-generated memory is treated as a cache of the Brain, never as the Brain. Switching tools then costs nothing, and two tools can work on the same Brain on different days.
 
+## Why not something that already exists
+
+Checked on 2026-10-27 against the tools' own documentation and READMEs; the field moves fast, so re-check before relying on this.
+
+- **The memory built into Claude Code, Codex and ChatGPT.** Written by the model, machine-local, without sources or dates. Both Anthropic and OpenAI say so themselves: auto memory is «context, not enforced config», and memories are «a helpful recall layer, not the only source for rules that must always apply». We use it, as a cache that points at the Brain. The day this was written, the Codex memory on our server still said the machine was the old host; the Brain had recorded the move, with a date, a month earlier.
+- **Karpathy's LLM Wiki and its implementations** (karpathy-llm-wiki, llm-wiki, wiki-skills and others). This Brain started from that pattern in June 2026 and keeps its core: raw sources, a model-maintained wiki, ingest, query, lint. The gist calls itself intentionally abstract. What living in it added: the owner's own words as a separate, immutable layer with a rule that the system never characterizes the owner; a work layer (tasks, per-task state, log, start and result cards, acceptance by the human); one contract shared by two agent tools and two machines; and a record of which mechanisms did not earn their cost. The implementations we read ship knowledge operations only, with one exception that has tasks but no acceptance.
+- **Agent memory services** (mem0, Zep, Supermemory, Hindsight, Letta). They store facts about you for retrieval through an API; the model writes them, nothing carries a source, and the data lives with a provider. Their benchmark claims are vendor-run and disputed among themselves. Nothing here needs a service.
+- **Markdown memory over MCP** (Basic Memory). Closest in spirit: plain files, several clients. But «AI and humans write to the same files»: there is no boundary between what you said and what a model concluded, and no work layer.
+- **Agents with their own memory** (Hermes, OpenClaw). The memory belongs to the agent, a few thousand characters of notes plus session search; the owner does not write it and cannot take it to another tool.
+- **Note apps with AI** (Obsidian plugins, Notion AI, Mem, Tana, Reflect). Your notes plus a chat over them. Good for writing; none gives an agent a contract for doing your work and reporting it.
+
+What they do better, honestly: contradiction gates before commit (wiki-skills), importing agent session logs (llm-wiki by Pratiyush), MCP access from any client (Basic Memory), and far larger audiences. Borrow when a concrete pain appears.
+
 ## What was deliberately not carried over
 
 Team-specific routes (ticket systems, product repositories, deployment environments), the owner's personal conventions and profile, domain skills tied to one person's hobbies, the automation layer, and machine-specific configuration. Each of these can be added by the owner as domains, skills or conventions once the core works.
