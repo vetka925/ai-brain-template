@@ -1,6 +1,6 @@
 # AI Brain — a personal memory and working system for you and your AI agent
 
-**Give your AI agent a link to this repository and tell it:**
+**Give your AI agent this link, `https://github.com/vetka925/ai-brain-template`, and tell it:**
 
 > Install my personal AI Brain from this repository by following its INSTALL.md. Then help me move my existing notes, chats and projects into it.
 
